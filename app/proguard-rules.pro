@@ -1,21 +1,26 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+##################################
+# 🛡️ Safe Proguard Rules for Compose + Lifecycle
+##################################
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Compose Runtime (essential)
+-keep class androidx.compose.runtime.** { *; }
+-dontwarn androidx.compose.**
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Material3 (essential UI components)
+-keep class androidx.compose.material3.** { *; }
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Lifecycle & ViewTree (to avoid LocalLifecycleOwner crash)
+-keep class androidx.lifecycle.ViewTreeLifecycleOwner { *; }
+-keep class androidx.lifecycle.ViewTreeViewModelStoreOwner { *; }
+
+# Your app's main entry (optional but useful)
+-keep class com.spender.calculator.MainActivity { *; }
+
+# Optional: Allow R8 to remove logs
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+    public static *** i(...);
+    public static *** w(...);
+    public static *** e(...);
+}

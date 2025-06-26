@@ -107,7 +107,8 @@ fun Calculator(
                 ),
                 modifier = Modifier
                     .padding(end = 11.dp, bottom = 5.dp)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                maxLines = 2
             )
 
             Text(
@@ -119,7 +120,8 @@ fun Calculator(
                 ),
                 modifier = Modifier
                     .padding(end = 11.dp, bottom = 20.dp)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                maxLines = 2
             )
 
             LazyVerticalGrid(
